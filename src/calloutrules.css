@@ -1,0 +1,138 @@
+/* CSS file */
+@namespace s "library://ns.adobe.com/flex/spark";
+@namespace mx "library://ns.adobe.com/flex/mx";
+@namespace local "*";
+@namespace view "view.*";
+
+/*
+////////////////////////////////////////////////////////////////////////////////
+//
+//  CODE11.COM
+//  Copyright 2011
+//  All Rights Reserved.
+//
+//  @author		Romeo Copaciu romeo.copaciu@code11.com
+//  @date		23 March 2011
+//  @version	1.0
+//  @site		code11.com
+//
+////////////////////////////////////////////////////////////////////////////////
+*/
+
+
+@font-face {
+	src: url("/../assets/PIXEARG_.TTF");
+	font-family: "pixarg";
+	embed-as-cff: true;
+}
+
+view|Callout {
+	font-family: "pixarg";
+	font-size: 8;
+}
+
+/* calloutData syntax: calloutName,event|action|property|value;
+-- posible actions: show, hide, hideall
+-- posible positions: left, right, above, below;
+
+calloutText is the text that will show in the callout
+*/
+
+s|ToggleButton#enable {
+	calloutData:"disabledinfo,rollOver|show","disabledinfo,rollOut|hide";
+}
+
+s|Button {
+	calloutData:"calloutone,click|show","callouttwo,click|hide","callouttwo,rollOver|show";
+}
+
+view|TestForm {
+	calloutData:"showFormInfo,addedToStage|show","showFormInfo,click|hide";
+}
+
+view|TestForm s|TextInput#fnInput {
+	calloutData:"fnInfo,focusIn|show","fnInfo,focusOut|hide";
+}
+
+view|TestForm s|TextInput#lnInput {
+	calloutData:"lnInfo,focusIn|show","lnInfo,focusOut|hide";
+}
+
+view|TestForm s|TextInput#phoneInput {
+	calloutData:"phoneInfo,focusIn|show","phoneInfo,focusOut|hide";
+}
+
+view|TestForm s|TextInput#ageInput {
+	calloutData:"ageInfo,focusIn|show","ageInfo,focusOut|hide";
+}
+
+.calloutone {
+	text:"Congratulation now the button has been clicked";
+	x:100;
+	y:0;
+	hArrowOffset:-50;
+	direction:"above";
+	position:"relative";
+}
+
+
+.callouttwo {
+	text:"You rolled over this button but you should click it if you want it to do anything";
+	x:0;
+	y:10;
+	direction:"left";
+	position:"relative";
+	vArrowOffset:-20;
+}
+
+.disabledinfo {
+	text:"When this toggle button is enabled callouts are disabled";
+	x:100;
+	y:30;
+	direction:"below";
+	position:"relative";
+	hArrowOffset:-50;
+}
+
+.showFormInfo {
+	text:"Just enter data into this form";
+	x:400;
+	y:100;
+	direction:"right";
+	position:"relative";
+}
+
+.fnInfo {
+	text:"Enter your first name";
+	x:0;
+	y:10;
+	direction:"right";
+	position:"relative";
+}
+
+.lnInfo {
+	text:"Enter your last name";
+	x:0;
+	y:10;
+	direction:"right";
+	position:"relative";
+}
+
+.phoneInfo {
+	text:"Enter your phone number enter only numbers, don't cheat!";
+	x:0;
+	y:10;
+	direction:"right";
+	position:"relative";
+}
+
+.ageInfo {
+	text:"Enter your age, unless you're female. In that case enter phone number again.";
+	x:0;
+	y:10;
+	direction:"right";
+	position:"relative";
+}
+
+
+

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+//  CODE11.COM
+//  Copyright 2011
+//  All Rights Reserved.
+//
+//  @author		Romeo Copaciu romeo.copaciu@code11.com
+//  @date		23 March 2011
+//  @version	1.0
+//  @site		code11.com
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<view:CalloutBase xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 width="0" height="0"
+		 clipAndEnableScrolling="false"
+		 addedToStage="atsHandler(event)"
+		 alpha="0" xmlns:view="com.code11.calloutmanager.view.*"
+		 >
+	<fx:Script>
+		<![CDATA[
+			import com.greensock.TweenLite;
+			
+			import spark.components.PopUpPosition;
+			
+			
+			override public function close(e:Event = null):void {
+				clearTimeout(super.timeoutID);
+				TweenLite.to(this,0.2,{alpha:0,onComplete:remove});
+			}
+			
+
+			override protected function atsHandler(event:Event):void
+			{
+				timeoutID = setTimeout(close,25000);
+				TweenLite.to(this,0.5,{alpha:1,delay:.5});
+			}
+			
+			override protected function createChildren():void {
+				super.createChildren();
+			}
+			
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void {
+				if (anchor) {
+					switch (anchor.popUpPosition) {
+						case PopUpPosition.LEFT:
+							arrow.rotation = -90;
+							arrow.right = 1;
+							arrow.verticalCenter = vArrowOffset;
+							arrow.horizontalCenter = null;
+							arrow.bottom = null;
+							holder.bottom = - holder.height/2 + vArrowOffset;
+							holder.right = 0;
+							break;
+						case PopUpPosition.RIGHT:
+							arrow.rotation = 90;
+							arrow.left = 1;
+							arrow.verticalCenter = vArrowOffset;
+							arrow.horizontalCenter = null;
+							arrow.bottom = null;
+							holder.bottom = - holder.height/2 + vArrowOffset;
+							break;
+						case PopUpPosition.ABOVE:
+							holder.bottom = 0;
+							holder.right = - holder.width/2 + hArrowOffset;
+							arrow.horizontalCenter = hArrowOffset;
+							break;
+						case PopUpPosition.BELOW:
+							holder.right = - holder.width/2 + hArrowOffset;
+							arrow.horizontalCenter = hArrowOffset;
+							arrow.top = 1;
+							content.top = 24;
+							arrow.bottom = null;
+							arrow.rotation = 180;
+							break;
+						default:
+							holder.right = - holder.width/2 + hArrowOffset;
+							arrow.horizontalCenter = hArrowOffset;
+					}
+				}
+				super.updateDisplayList(unscaledWidth,unscaledHeight);
+			}
+			
+			
+			protected function dismissHandler(event:MouseEvent):void {
+				dispatchEvent(new Event(DISMISS));
+			}
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:Rect width="3" height="3">
+		<s:fill>
+			<s:SolidColor color="#00FF00" alpha="0"/>
+		</s:fill>
+	</s:Rect>
+	<s:Group id="holder" minHeight="100" width="250" >
+		<s:Group id="content" left="24" right="24" top="4" minWidth="0" minHeight="0" >
+			<s:BitmapImage top="0" right="0" left="0" bottom="2" fillMode="scale"
+						   source="@Embed('../assets/callout_bg2.png',scaleGridLeft=8,scaleGridRight=179,scaleGridTop=21,scaleGridBottom=90)" />
+			<s:Label text="TIPS" left="10" top="7" color="0" fontFamily="Arial" fontWeight="bold" fontSize="11"/>
+			<s:Label id="labelDisplay" text="{text}" left="10" right="10" top="30" bottom="30" color="0" fontSize="11" fontFamily="Arial"/>
+			<s:Label text="DISMISS CALLOUTS" left="10" right="5" bottom="32" color="0" fontFamily="Arial" fontSize="11" fontWeight="bold" buttonMode="true" id="dismissLabel"
+					 click="dismissHandler(event)"/>
+			<s:Group id="closeBtn" width="20" height="20" right="0" top="0" mouseChildren="false" buttonMode="true" click="close()">
+				<s:BitmapImage 
+					source="@Embed('../assets/callout_close.png')" top="7" right="7"/>
+			</s:Group>
+		</s:Group>
+		<!--- @copy spark.components.SkinnableContainer#contentGroup -->
+		<s:BitmapImage id="arrow"
+					   source="@Embed('../assets/callout_arrow.png')" bottom="1" horizontalCenter="0"/> 
+		
+	</s:Group>
+</view:CalloutBase>

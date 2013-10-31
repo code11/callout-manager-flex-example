@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+//  CODE11.COM
+//  Copyright 2011
+//  All Rights Reserved.
+//
+//  @author		Romeo Copaciu romeo.copaciu@code11.com
+//  @date		23 March 2011
+//  @version	1.0
+//  @site		code11.com
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<s:TitleWindow xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx"
+		 title="YAForm">
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<s:VGroup width="100%" height="100%" paddingTop="5" paddingLeft="10" paddingRight="10" paddingBottom="10">
+		<s:Rect id="labelWidth" width="40%" />
+		<s:HGroup width="100%" verticalAlign="middle">
+			<s:Label text="FIRST NAME:" width="{labelWidth.width}" />
+			<s:TextInput id="fnInput" width="100%" />
+		</s:HGroup>
+		<s:HGroup width="100%" verticalAlign="middle">
+			<s:Label text="LAST NAME:" width="{labelWidth.width}" />
+			<s:TextInput id="lnInput" width="100%" />
+		</s:HGroup>
+		<s:HGroup width="100%" verticalAlign="middle">
+			<s:Label text="PHONE:" width="{labelWidth.width}" />
+			<s:TextInput id="phoneInput" width="100%" />
+		</s:HGroup>
+		<s:HGroup width="100%" verticalAlign="middle">
+			<s:Label text="AGE:" width="{labelWidth.width}" />
+			<s:TextInput id="ageInput" width="100%" />
+		</s:HGroup>
+	</s:VGroup>
+</s:TitleWindow>

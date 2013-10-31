@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+////////////////////////////////////////////////////////////////////////////////
+//
+//  CODE11.COM
+//  Copyright 2011
+//  All Rights Reserved.
+//
+//  @author		Romeo Copaciu romeo.copaciu@code11.com
+//  @date		23 March 2011
+//  @version	1.0
+//  @site		code11.com
+//
+////////////////////////////////////////////////////////////////////////////////
+-->
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx" minWidth="955" minHeight="600"
+			   creationComplete="application1_creationCompleteHandler(event)" xmlns:view="view.*">
+	<fx:Style source="calloutrules.css" />
+	<fx:Script>
+		<![CDATA[
+			import com.code11.calloutmanager.CalloutManager;
+			
+			import mx.core.IVisualElement;
+			import mx.events.FlexEvent;
+			
+			import view.Callout;
+			
+			[Bindable]
+			public var calloutManager:CalloutManager;
+			protected function application1_creationCompleteHandler(event:FlexEvent):void {
+				calloutManager = new CalloutManager();
+				calloutManager.styleManager = styleManager;
+				calloutManager.manageView(this,true);
+				calloutManager.watch(this);
+				calloutManager.calloutClass = Callout;
+			}
+
+			protected function aBut_clickHandler(event:MouseEvent):void {
+				addElement(testForm);
+			}
+
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+		<view:TestForm id="testForm" y="200" x="50" width="400" close="{removeElement(event.currentTarget as IVisualElement)}"/>
+	</fx:Declarations>
+	<s:Label text="Demonstrates how the CALLOUT MANAGER works!" fontSize="46" x="30" y="30" width="600"/>
+	<s:Button id="aBut" label="TEST" x="300" y="140" width="120"
+			  click="aBut_clickHandler(event)"/>
+	<s:ToggleButton id="enable" label="{'CALLOUTS DISABLED'}" x="430" y="140"
+					selected="@{calloutManager.calloutsDisabled}"/>
+</s:Application>
